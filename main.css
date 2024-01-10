@@ -1,4 +1,5 @@
-* {
+/* Scroll */
+/* * {
     box-sizing: border-box;
 }
 
@@ -17,5 +18,694 @@ body {
     height: 5px;
     background-color: #0075ff;
     z-index: 99999;
-}
+} */
+
 /* --------------------------------------------------------- */
+
+/* ------------Hangman----------- */
+/* :root {
+    --boder-width: 4px;
+    --draw-color: #222;
+}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Tahoma, Arial;
+}
+
+.container {
+    margin: 20px auto;
+    width: 1000px;
+}
+
+.row {
+    display: flex;
+}
+
+hr {
+    border: 1px solid #eee;
+}
+
+.game-info {
+    display: flex;
+}
+
+.game-info .game-name {
+    flex: 1;
+}
+
+.game-info .category {
+    flex: 1;
+    text-align: right;
+}
+
+.game-info .category span {
+    text-transform: capitalize;
+    color: #e91e63;
+    font-weight: bold;
+}
+
+.hangman-draw {
+    flex: 1;
+    background-color: #f8f8f8;
+    padding: 20px;
+    height: 324px;
+}
+
+.hangman-draw .the-draw {
+    width: 60px;
+    height: 280px;
+    border-bottom: var(--boder-width) solid var(--draw-color);
+    position: relative;
+    margin: auto;
+    left: -60px;
+    display: none;
+}
+
+.hangman-draw .the-stand {
+    position: absolute;
+    width: var(--boder-width);
+    background-color: var(--draw-color);
+    height: 100%;
+    left: 50%;
+    margin-left: -2px;
+    display: none;
+}
+
+.hangman-draw .the-hang {
+    display: none;
+}
+
+.hangman-draw .the-hang::before {
+    content: "";
+    position: absolute;
+    height: 4px;
+    background-color: var(--draw-color);
+    width: 100px;
+    left: 30px;
+    top: 15px;
+}
+
+.hangman-draw .the-hang::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 30px;
+    background-color: var(--draw-color);
+    left: 130px;
+    top: 15px;
+}
+
+.hangman-draw .the-rope {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    left: 95px;
+    top: 45px;
+    border: var(--boder-width) dashed var(--draw-color);
+    display: none;
+}
+
+.hangman-draw .the-man .head {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: var(--boder-width) solid var(--draw-color);
+    position: absolute;
+    left: 105px;
+    top: 55px;
+    display: none;
+}
+
+.hangman-draw .the-man .body {
+    position: absolute;
+    background-color: var(--draw-color);
+    width: var(--boder-width);
+    height: 110px;
+    top: 102px;
+    left: 130px;
+    display: none;
+}
+
+.hangman-draw .the-man .hands {
+    display: none;
+}
+
+.hangman-draw .the-man .hands::before,
+.hangman-draw .the-man .hands::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background-color: var(--draw-color);
+    top: 140px;
+}
+
+.hangman-draw .the-man .hands::before {
+    left: 85px;
+    transform: rotate(30deg);
+}
+
+.hangman-draw .the-man .hands::after {
+    left: 130px;
+    transform: rotate(-30deg);
+}
+
+.hangman-draw .the-man .legs {
+    display: none;
+}
+
+.hangman-draw .the-man .legs::before,
+.hangman-draw .the-man .legs::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background-color: var(--draw-color);
+    top: 220px;
+}
+
+.hangman-draw .the-man .legs::before {
+    left: 85px;
+    transform: rotate(-30deg);
+}
+
+.hangman-draw .the-man .legs::after {
+    left: 130px;
+    transform: rotate(30deg);
+}
+
+.hangman-draw.wrong-1 .the-draw {
+    display: block;
+}
+
+.hangman-draw.wrong-2 .the-stand {
+    display: block;
+}
+
+.hangman-draw.wrong-3 .the-hang {
+    display: block;
+}
+
+.hangman-draw.wrong-4 .the-rope {
+    display: block;
+}
+
+.hangman-draw.wrong-5 .head {
+    display: block;
+}
+
+.hangman-draw.wrong-6 .body {
+    display: block;
+}
+
+.hangman-draw.wrong-7 .hands {
+    display: block;
+}
+
+.hangman-draw.wrong-8 .legs {
+    display: block;
+}
+
+.letters {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+}
+
+.letters.finished {
+    pointer-events: none;
+}
+
+.letters .letter-box {
+    width: 55px;
+    height: 55px;
+    display: inline-block;
+    background-color: #009688;
+    color: white;
+    font-size: 24px;
+    margin-right: 10px;
+    line-height: 55px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.letters-guess {
+    margin: 10px auto;
+    background-color: #f8f8f8;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 104px;
+}
+
+.letters-guess span {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 60px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #fdfdfd;
+    border-bottom: 3px solid #222;
+    transition: 0.3s;
+}
+
+.letters-guess span.has-space {
+    background: none;
+    border-bottom: none;
+    position: relative;
+}
+
+.letters-guess span.has-space::before {
+    content: "";
+    width: 20px;
+    height: 4px;
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.letters .letter-box.clicked {
+    background-color: #222;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.popup {
+    position: fixed;
+    background-color: #009688;
+    color: white;
+    padding: 100px 20px;
+    width: 80%;
+    top: 10%;
+    left: 10%;
+    text-align: center;
+    font-size: 40px;
+    border: 1px solid #ccc;
+} */
+/* -------------------------------------------------------------------- */
+
+/* ---------------------------Tooltip---------------------------- */
+/* * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, Tahoma;
+}
+
+button {
+    background-color: #eee;
+    margin: 100px auto;
+    padding: 10px 20px;
+    display: block;
+    font-size: 40px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+button:focus {
+    outline: none;
+}
+
+button span {
+    background-color: #333;
+    color: white;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    min-width: 260px;
+    padding: 10px 15px;
+    top: -60px;
+    transition: .5s;
+    opacity: 0;
+}
+
+button span::before {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-style: solid;
+    border-width: 10px;
+    border-color: #333 transparent transparent transparent;
+    
+}
+
+button:hover {
+    overflow: visible;
+}
+
+button:hover span {
+    opacity: 1;
+}
+
+[data-position = "bottom"] span {
+    top: auto;
+    bottom: -60px;
+}
+
+[data-position = "bottom"] span::before {
+    bottom: auto;
+    top: -20px;
+    border-color: transparent transparent #333 transparent;
+} */
+/* ---------------------------------------------------------- */
+/* ----------------------------Animated Wavy Background----------------------------- */
+/* * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Cairo", sans-serif;
+}
+
+.page {
+    height: 100vh;
+}
+
+.page::before {
+    content: "";
+    position: fixed;
+    width: 300%;
+    height: 100%;
+    background-color: #0075ff;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) skew(0, -10deg);
+    border-radius: 50%;
+    z-index: -1;
+    animation: waving 5s ease-in-out infinite alternate;
+}
+
+.card {
+    width: 300px;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ddd inset;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.card h2 {
+    margin: 0;
+}
+
+.card p {
+    margin: 0;
+}
+
+@keyframes waving {
+    from {
+        transform: translateX(-50%) skew(0, -10deg);
+    }
+
+    to {
+        transform: translateX(-30%) skew(10deg, 0);
+    }
+} */
+/* ------------------------------------------------------------ */
+/* ------------------------Burger Icon------------------------- */
+/* * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Cairo", sans-serif;
+}
+
+.menu-icon {
+    margin: 20px auto;
+    width: 20px;
+    height: 14px;
+    cursor: pointer;
+    position: relative;
+}
+
+.menu-icon span {
+    background-color: black;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.menu-icon span:first-child {
+    position: absolute;
+    top: 0;
+}
+
+.menu-icon span:nth-child(2) {
+    position: absolute;
+    top: 6px;
+}
+
+.menu-icon span:last-child {
+    position: absolute;
+    top: 12px;
+}
+
+.menu-icon:hover span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon:hover span:nth-child(1),
+.menu-icon:hover span:nth-child(3) {
+    top: 6px;
+    background-color: red;
+}
+
+.menu-icon:hover span:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.menu-icon:hover span:nth-child(3) {
+    transform: rotate(-45deg);
+} */
+/* ------------------------------------------------------- */
+/* ----------------------Animate Width---------------------- */
+/* * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", sans-serif;
+    margin: 0;
+  }
+  section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  section:first-child {
+    background-color: #aaa;
+  }
+  section:nth-child(2) {
+    background-color: #bbb;
+  }
+  section:nth-child(3) {
+    background-color: #ccc;
+  }
+  section:last-of-type {
+    background-color: #eee;
+  }
+  .progress {
+    position: relative;
+    width: 500px;
+    height: 30px;
+    background-color: white;
+    margin: 10px;
+  }
+  .progress span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: indianred;
+    transition: width 0.3s linear;
+  } */
+/* --------------------------------------------------------- */
+
+/* -----------------------Count Input------------------------- */
+
+/* * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+    width: 300px;
+    margin: 20px auto;
+}
+
+input {
+    padding: 15px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #d7d7d7;
+    background-color: #fbfbfb;
+}
+
+input:focus {
+    outline: none;
+}
+
+.progress {
+    height: 2px;
+    display: block;
+    position: relative;
+    background-color: #2196f3;
+    top: -2px;
+    transition: 0.5s;
+}
+
+.count {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.zero {
+    font-weight: bold;
+    color: red;
+} */
+
+/* ----------------------------------------------------- */
+
+/* ------------------------Countdown Timer------------------------ */
+/* ---------------------------------------------------- */
+/* -----------------------Image Slider------------------------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.slider-container {
+    margin: 10px auto;
+    width: 800px;
+    height: 250px;
+    position: relative;
+}
+
+.slider-container img {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s;
+    z-index: 1;
+    height: 250px;
+}
+
+.slider-container img.active {
+    opacity: 1;
+}
+
+.slider-container .slide-number {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: rgb(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 20px;
+    z-index: 2;
+    border-radius: 6px;
+}
+
+.slider-controls {
+    width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+.slider-controls .prev,
+.slider-controls .next {
+    background-color: #009688;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 5px;
+    user-select: none;
+    width: 20%;
+}
+
+.slider-controls .prev {
+    float: left;
+}
+
+.slider-controls .next {
+    float: right;
+}
+
+.slider-controls .prev.disabled,
+.slider-controls .next.disabled {
+    background-color: rgba(0, 150, 136, 0.5);
+    cursor: no-drop;
+}
+
+.slider-controls .indicators {
+    width: 60%;
+    float: left;
+}
+
+.slider-controls .indicators ul {
+    list-style: none;
+    margin: 0;
+    text-align: center;
+}
+
+.slider-controls .indicators ul li {
+    display: inline-block;
+    background-color: #f6f6f6;
+    color: #333;
+    font-weight: bold;
+    height: 28px;
+    width: 28px;
+    border-radius: 4px;
+    margin: 0 2px;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.slider-controls .indicators ul li.active {
+    background-color: #009688;
+    color: #fff;
+}
